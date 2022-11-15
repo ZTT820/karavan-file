@@ -1,0 +1,69 @@
+apiVersion: camel.apache.org/v1
+kind: Integration
+metadata:
+  name: 123.yaml
+spec:
+  flows:
+    - route:
+        from:
+          uri: esb
+          steps:
+            - to:
+                uri: entitymap
+                parameters:
+                  mapping: >-
+                    {"AtlasMapping":{"jsonType":"io.atlasmap.v2.AtlasMapping","dataSource":[{"jsonType":"io.atlasmap.v2.DataSource","id":"current.name","name":"current.name","uri":"atlas:java:com.glory.mes.mm.lot.model.MLot?className=com.glory.mes.mm.lot.model.MLot","dataSourceType":"SOURCE","description":"Java_document_class_com.glory.mes.mm.lot.model.MLot_"},{"jsonType":"io.atlasmap.v2.DataSource","id":"current.name22","name":"current.name22","uri":"atlas:java:com.glory.mes.mm.lot.model.MLot?className=com.glory.mes.mm.lot.model.MLot&collectionType=MAP","dataSourceType":"TARGET","description":"Java_document_class_com.glory.mes.mm.lot.model.MLot_collection_type:MAP"}],"mappings":{"mapping":[{"jsonType":"io.atlasmap.v2.Mapping","id":"mapping.66068","inputField":[{"jsonType":"io.atlasmap.java.v2.JavaField","name":"mLotType","path":"{/mLotType}","fieldType":"STRING","docId":"current.name","scope":""}],"outputField":[{"jsonType":"io.atlasmap.v2.PropertyField","name":"name","path":"/current/name","fieldType":"STRING","docId":"current.name","scope":"current"}]},{"jsonType":"io.atlasmap.v2.Mapping","id":"mapping.525747","inputField":[{"jsonType":"io.atlasmap.java.v2.JavaField","name":"MLOTID","path":"{/LOT/MLOTID}","fieldType":"STRING","docId":"current.name","scope":""}],"outputField":[{"jsonType":"io.atlasmap.java.v2.JavaField","name":"MLOTID","path":"{/LOT/MLOTID}","fieldType":"STRING","docId":"current.name22","scope":""}]}]},"name":"UI.0","version":null,"lookupTables":{"lookupTable":[]},"constants":{"constant":[]},"properties":{"property":[{"name":"name","fieldType":"COMPLEX","scope":"current","dataSourceType":"SOURCE","entityName":"com.glory.mes.mm.lot.model.MLot","collectionType":"MAP"},{"name":"name","fieldType":"STRING","scope":"current","dataSourceType":"TARGET"},{"name":"name22","fieldType":"COMPLEX","scope":"current","dataSourceType":"TARGET","entityName":"com.glory.mes.mm.lot.model.MLot","collectionType":"MAP"}]}}}
+            - setProperty:
+                expression: {}
+    - entities:
+        - name: LotInfo
+          type: LotInfo
+          sourceType: Json
+          properties:
+            mLotId1: java.lang.String
+            mLotType: java.lang.String
+            holdState: java.lang.String
+            MLotList:
+              - mLotId2: java.lang.String
+              - mLotType: java.lang.String
+              - holdState: java.lang.String
+            MLots:
+              mLotId3: java.lang.String
+              mLotType: java.lang.String
+              holdState: java.lang.String
+        - name: ADMESSAGE2
+          type: ADMESSAGE2
+          sourceType: Xml
+          properties:
+            KEYID: Apple
+            MESSAGE: XX
+            MESSAGE_ZH: XXC
+            ADMESSAGE:
+              - KEYID: Apple
+              - MESSAGE: XX
+              - MESSAGE_ZH: XXC
+            LOT:
+              MLOTID: Apple
+              MLOTTYPE: XX
+              MLOTSTATUE: XXC
+        - name: com.glory.mes.mm.lot.model.MLot
+          type: com.glory.mes.mm.lot.model.MLot
+          sourceType: Java
+          properties:
+            mLotId: java.lang.String
+            mLotType: java.lang.String
+            state: java.lang.String
+            holdState: java.lang.String
+            mainQty: java.math.BigDecimal
+            LOT:
+              MLOTID: Apple
+              MLOTTYPE: XX
+              MLOTSTATUE: XXC
+        - name: Body
+          type: Body
+          sourceType: Xml
+          properties:
+            ADMESSAGE:
+              KEYID: Apple
+              MESSAGE: XX
+              MESSAGE_ZH: XXC
