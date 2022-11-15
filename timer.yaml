@@ -1,1 +1,29 @@
-hello
+apiVersion: camel.apache.org/v1
+kind: Integration
+metadata:
+  name: timer.yaml
+spec:
+  flows:
+    - route:
+        from:
+          uri: timer:baidu
+          steps:
+            - to:
+                uri: http://www.baidu.com
+            - log:
+                message: Got ${body}
+                logName: get baidu
+            - to:
+                uri: 'language:xpath:'
+                parameters:
+                  script: /html
+            - log:
+                logName: log2
+            - to:
+                uri: file:dirF2/baidu
+                parameters:
+                  fileName: baidu.html
+          parameters:
+            fixedRate: true
+            delay: '0'
+            period: '10000'
