@@ -1,0 +1,12 @@
+apiVersion: camel.apache.org/v1
+kind: Integration
+metadata:
+  name: ztzzz.yaml
+spec:
+  flows:
+    - route:
+        from:
+          uri: disruptor-vm
+          steps:
+            - sort:
+                expression: {}
