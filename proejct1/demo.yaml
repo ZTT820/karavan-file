@@ -9,3 +9,4 @@ spec:
           uri: amqp
           steps:
             - step: {}
+            - step: {}
