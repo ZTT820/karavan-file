@@ -6,7 +6,12 @@ spec:
   flows:
     - route:
         from:
-          uri: amqp
+          uri: activemq
           steps:
-            - loop:
+            - resequence:
                 expression: {}
+            - resequence:
+                expression: {}
+            - circuitBreaker: {}
+            - to:
+                uri: websocket-jsr356
