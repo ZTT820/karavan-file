@@ -1,0 +1,9 @@
+apiVersion: camel.apache.org/v1
+kind: Integration
+metadata:
+  name: 345.yaml
+spec:
+  flows:
+    - route:
+        from:
+          uri: consul
